@@ -1,0 +1,11 @@
+{
+  "name": "nelnet",
+  "version": "1.0.0",
+  "description": "Back-End Assessment (Stand Alone)",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Dave Houston",
+  "license": "ISC"
+}

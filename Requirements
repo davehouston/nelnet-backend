@@ -1,0 +1,30 @@
+We designed an exercise focused on API design that we hope will only take
+about 1.5 hours to complete, depending on your past experience. To respect
+your time, this exercise does not require writing functional code. Instead,
+you will design an API contract that supports AWS Cognito’s User Pool
+Authentication Flow. You will also write pseudo-code that demonstrates how you
+would implement and test one of these endpoints. To complete this exercise,
+you should create three artifacts:
+
+  1. An OpenAPI/Swagger file documenting the request bodies, response bodies,
+  and status codes for each endpoint necessary to implement a Server-Side
+  Authentication Flow using Amazon Cognito. Specifically, the endpoints should
+  support:
+    
+    a) Initiating an authentication flow and responding with SRP challenge
+    information provided by Cognito (don’t worry, you don’t have to understand
+    all the internals of how SRP works to do this).
+    
+    b) Accept a challenge response request and respond with tokens if
+    authentication succeeds and an error if authentication fails. 
+  
+  2. JavaScript code (that doesn’t have to work but should demonstrate good
+  programming practices) for how you would implement any one endpoint of your
+  choice that you designed in step 1. To keep the scope small, feel free to
+  call out in comments any assumptions you are making about any existing
+  infrastructure or tooling, such as logging and alerting mechanisms. 
+  
+  3. JavaScript code (that doesn’t have to work but should demonstrate good
+  programming practices) for how you would test the endpoint implementation
+  from step 2. Feel free to assume any test framework is in place
+
