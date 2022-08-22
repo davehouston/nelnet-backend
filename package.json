@@ -3,9 +3,18 @@
   "version": "1.0.0",
   "description": "Back-End Assessment (Stand Alone)",
   "main": "app.js",
+  "type": "module",
   "scripts": {
     "test": "test"
   },
   "author": "Dave Houston",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1199.0",
+    "express": "^4.18.1"
+  },
+  "devDependencies": {
+    "mocha": "^10.0.0",
+    "npx": "^10.2.2"
+  }
 }

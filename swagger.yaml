@@ -1,0 +1,111 @@
+openapi: 3.0.3
+info:
+  title: BackEndCognito
+  description: A sample Back End API
+  version: 1.0.11
+
+paths:
+  /auth/session/{sessionId}:
+    # Maybe POST instead?  Argue about REST principles!
+    put:  
+      description: Continue authentication flow for a given session ID.
+      operationId: continueSession
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            $ref: '#/components/schemas/SessionId'
+      responses:
+        '403': 
+          $ref: '#/components/responses/ErrorResponse'
+        '200': 
+          $ref: '#/components/responses/AuthSuccessResponse'
+        '202':
+          $ref: '#/components/responses/AuthChallengeResponse'  
+  /auth/session:
+    # Maybe use POST to keep the user/srp out of the URL? But this should probably be a GET
+    # if you listen to REST fanatics.
+    get:
+      description: Initiate an auth flow, get a session identifier and the next challenge, or an access token.
+      operationId: getSession
+      parameters:
+        - name: username
+          in: query
+          description: The username that is being authenticated
+          required: true
+          schema:
+            $ref: '#/components/schemas/Username'
+        - name: srp
+          in: query
+          description: The client-generated SRP_A value
+          required: true
+          schema: 
+            $ref: '#/components/schemas/SRP'
+      responses:
+        '403': # Broken
+          $ref: '#/components/responses/ErrorResponse'
+        '200': # Authed
+          $ref: '#/components/responses/AuthSuccessResponse'
+        '202': # Need more challenges
+          $ref: '#/components/responses/AuthChallengeResponse'
+components:
+  responses:
+    ErrorResponse:
+      description: An error occured, or authentication failed.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+    AuthSuccessResponse:
+      description: Authentication was successful.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthSuccess'
+    AuthChallengeResponse:
+      description: Further challenges are required
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AuthChallenge'
+  schemas:
+    Username: 
+      type: string
+      description: A valid username
+    SessionId:
+      type: string
+    SRP:
+      type: string
+    Error:
+      type: object
+      properties:
+        message:
+          type: string
+          description: An error message
+        recoverable:
+          type: boolean
+    ChallengeName:
+      type: string
+      description: The name of the challenge
+      enum:
+        - USER_SRP_AUTH
+        - UNSUPPORTED
+    ChallengeParameters:
+      type: string
+    AuthSuccess:
+      type: string
+    AuthChallenge:
+      type: object
+      properties:
+        Session: 
+          $ref: '#/components/schemas/SessionId'
+        Name:
+          $ref: '#/components/schemas/ChallengeName'
+        Parameters: 
+          $ref: '#/components/schemas/ChallengeParameters'
+
+
+
+
+ 

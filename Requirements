@@ -28,3 +28,41 @@ you should create three artifacts:
   programming practices) for how you would test the endpoint implementation
   from step 2. Feel free to assume any test framework is in place
 
+1. Present some form of credentials to Cognito; presume they represent a user
+   or similar from a secure web app.
+
+Request to Cognito:
+  AdminInitiateAuth
+    AuthFlow: USER_SRP_AUTH
+    Get Authentication Parameters as a response.
+
+    -> Check for HTTP status, return error / return challenge to user.
+
+2. Accept challenge response data, incl. session ID
+  AdminRespondToAuthChallenge
+    -> Authentication Parameters
+  
+  -> Check HTTP status, return error / return challenge / token to user
+
+
+[-> AdminInitiateAuth]
+GET /auth/session
+      Params:
+        username
+        srp_a
+  Returns:
+    error (null if successful)
+    session id
+    data (optional)
+      ChallengeName (present if you must look on challenge)
+      ChallengeParameters
+      ...
+    token (optional)
+      accessToken
+      ExpiresIn
+      .. etc
+
+
+[-> AdminRespondToAuthChallenge]
+PUT /auth/session/<session id>
+  
