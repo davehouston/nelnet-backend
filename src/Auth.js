@@ -1,6 +1,5 @@
 import AWS from "aws-sdk";
 
-
 // Returns an access token, a challenge response, or an error.
 const initiateAuth = async (username, srp, req) => { 
   

@@ -17,6 +17,8 @@ const sendError = (message, genericMessage, recoverable, res) => {
   res.end();
 };
 
+
+// These functions should all be in their own module in a larger app. 
 app.get("/auth/session", async (req, res) => { 
   console.log(req.query)
   const username = req.query.username;
@@ -36,25 +38,28 @@ app.get("/auth/session", async (req, res) => {
   if( authRes.error === true ) { 
     res.status(403);
     res.send(authRes);
+    console.log("Error", authRes);
     return;
   }
 
   if( authRes.AccessToken !== null ) { 
     res.status(200);
     res.send(authRes.AccessToken);    // Does not conform to AWS API spec, yet
+    console.log("Token Success", { extra: "things", without: "PII" });
     return;
   }
 
   if( authRes.challengeResponse !== null ) { 
     res.status(202);
-    res.send(authRes.challengeResponse);  // does not comform to AWS API spec, yet
+    res.send(authRes.challengeResponse);  // does not conform to AWS API spec, yet
+    console.log("Challenge Response", { more: "things", alsoWithout: "PII" });
     return;
   }
 
   res.status(500);
-  res.send('Unknown error');
+  res.send("Unknown error");
 });
 
 app.listen(5000, () => { 
-  console.log("listening on port 5000");
+  console.log("listening on port 5000"); // BORING
 });

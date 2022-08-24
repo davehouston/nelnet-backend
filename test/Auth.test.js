@@ -4,6 +4,7 @@ import AWS from 'aws-sdk-mock';
 
 import {initiateAuth} from '../src/Auth.js';
 
+// Just enough to get the 'req' object correct for testing.
 const fakeRequest = { 
   headers: { host: 'localhost:5000', 'user-agent': 'curl/7.81.0', accept: '*/*' },
   ip: '169.254.1.2',
@@ -11,6 +12,8 @@ const fakeRequest = {
   path: '/auth/session'
 };
 
+// Some potential results we may get back, to save some typing
+// later
 const results = { 
   caughtError: {
     error: true,
@@ -32,6 +35,7 @@ describe("initiateAuth functional tests", async () => {
   before(() => { 
     AWS.mock('CognitoIdentityServiceProvider', 'adminInitiateAuth', () => { 
       return new Promise((res, rej) => { 
+        // Make this return an actual, real (mocked) AWS result. 
         res(true);
       });
     });
@@ -50,6 +54,8 @@ describe("initiateAuth functional tests", async () => {
 
   it("should succeed with proper inputs", async () => { 
     const res = await initiateAuth('dave', '5612313', fakeRequest);
+    // Obviously the wrong value, but for now, the mocked value returns
+    // true on success.  
     assert.equal(res, true);
   });
 
