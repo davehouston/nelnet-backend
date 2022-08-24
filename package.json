@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "report": "nyc report --reporter=lcov",
-    "test": "nyc -x \"**/test/**\" --reporter=text --reporter=lcov mocha 'test/'"
+    "oldtest": "nyc -x \"**/test/**\" --reporter=text --reporter=lcov mocha 'test/'",
+    "test": "c8 --all --reporter=text --reporter=lcov mocha 'test/'"
   },
   "author": "Dave Houston",
   "license": "ISC",
@@ -16,17 +17,9 @@
   },
   "devDependencies": {
     "aws-sdk-mock": "^5.7.0",
+    "c8": "^7.12.0",
     "chai": "^4.3.6",
     "mocha": "^10.0.0",
-    "npx": "^10.2.2",
-    "nyc": "^15.1.0"
-  },
-  "nyc": { 
-    "all": true,
-    "useSpawnWrap": true,
-    "include": [
-      "src/**",
-      "app.js"
-    ]
-  }
+    "npx": "^10.2.2"
+   }
 }

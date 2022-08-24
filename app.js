@@ -1,3 +1,6 @@
+// TODO: For a serious app, put this in its own module, to 
+// facilitate testing routes, etc. as well.  Especially since
+// there's some business logic that creeped in for "get /auth/session"
 import express from "express";
 import {challengeResponse, initiateAuth} from "./src/Auth.js";
 
