@@ -5,7 +5,8 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "test": "test"
+    "report": "nyc report --reporter=lcov",
+    "test": "nyc -x \"**/test/**\" --reporter=text --reporter=lcov mocha 'test/'"
   },
   "author": "Dave Houston",
   "license": "ISC",
@@ -14,7 +15,18 @@
     "express": "^4.18.1"
   },
   "devDependencies": {
+    "aws-sdk-mock": "^5.7.0",
+    "chai": "^4.3.6",
     "mocha": "^10.0.0",
-    "npx": "^10.2.2"
+    "npx": "^10.2.2",
+    "nyc": "^15.1.0"
+  },
+  "nyc": { 
+    "all": true,
+    "useSpawnWrap": true,
+    "include": [
+      "src/**",
+      "app.js"
+    ]
   }
 }
