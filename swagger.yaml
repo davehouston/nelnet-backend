@@ -76,7 +76,7 @@ components:
     SessionId:
       type: string
     SRP:
-      type: string
+      type: string    # Maybe number instead? 
     Error:
       type: object
       properties:
@@ -91,9 +91,9 @@ components:
       enum:
         - USER_SRP_AUTH
         - UNSUPPORTED
-    ChallengeParameters:
-      type: string
-    AuthSuccess:
+    ChallengeParameters:  # shape of this object is unclear from docs.  Would prefer to "try and see"       
+      type: string        
+    AuthSuccess:          # Same as ^^ 
       type: string
     AuthChallenge:
       type: object

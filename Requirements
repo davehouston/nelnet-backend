@@ -31,6 +31,10 @@ you should create three artifacts:
 1. Present some form of credentials to Cognito; presume they represent a user
    or similar from a secure web app.
 
+
+
+------- general notes while working
+
 Request to Cognito:
   AdminInitiateAuth
     AuthFlow: USER_SRP_AUTH
